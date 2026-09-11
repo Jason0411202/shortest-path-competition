@@ -5,7 +5,9 @@ Copy it to `solver.cpp` and make it faster. Same input, same output, less time.
 
 **Your entire job is one C++ file.** Everything else — downloading the data,
 timing, checking answers, computing the score — is done for you by one Python
-script, `grade.py`. You hand in `solver.cpp` and the `result.json` it writes.
+script, `grade.py`. You hand in `solver.cpp` and the `result.json` it writes
+by uploading them to the scoreboard at
+**https://shortestpaths.ccu2026algorithm.workers.dev** (see [What to submit](#what-to-submit)).
 
 ## How the pieces fit
 
@@ -60,7 +62,8 @@ Overall                 geomean = 17.361  (n=6)
 scored 0.1 — the `WRONG` line above cost this solver most of its score (without
 it the mean would be about 49). Correctness first, then speed.
 
-That is the whole workflow. Repeat step 4 as you improve `solver.cpp`.
+That is the whole workflow. Repeat step 4 as you improve `solver.cpp`, and
+upload the two files whenever you want to see where you stand.
 
 ### Iterating quickly
 
@@ -98,6 +101,10 @@ checked by reading your `solver.cpp`.
 
 ## What to submit
 
+Upload two files to the scoreboard:
+
+**https://shortestpaths.ccu2026algorithm.workers.dev**
+
 - `solver.cpp`, the whole of your work in that one file
 - `result.json`, written by step 4
 
@@ -105,6 +112,33 @@ Nothing else. `result.json` already records your times, the baseline times,
 the score, and the SHA-256 of the `solver.cpp` it was measured from — so upload
 the two files from the same run, not a `result.json` from one attempt beside a
 `solver.cpp` from another.
+
+### How to upload
+
+1. Open the scoreboard and click **Submit** (top right).
+2. Enter your **Student ID** exactly as it appears in the course roster. It is
+   shown publicly on the board.
+3. Choose your `result.json` and your `solver.cpp`.
+4. Tick the honour-code box and click **Submit and view ranking**.
+
+![The submit form: Student ID, result.json, solver.cpp, honour-code checkbox](slides/submit_form.png)
+
+The server re-derives your score from the per-instance times in `result.json`
+and ranks on that, then redirects you to the board with your row highlighted.
+Your `solver.cpp` is stored for the instructor only; it is never shown to
+other students.
+
+![The scoreboard: one row per student with overall, Global and Local means and the six per-instance speedups](slides/scoreboard.png)
+
+- **You may submit as many times as you like** before the deadline. Every
+  attempt is kept; your **best** score is the one that ranks (the *Tries*
+  column counts attempts).
+- The board closes at the deadline shown in the header (**27 Sep 2026,
+  23:59 Taipei**). Late uploads are refused.
+- **Overall / Global / Local** switch the ranking key; Overall is the official
+  one.
+- Uploads that were not produced by `grade.py --json`, or whose numbers do not
+  add up, are rejected with a message telling you what is wrong.
 
 ## How the score works
 
