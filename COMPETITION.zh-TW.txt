@@ -1,0 +1,107 @@
+最短路徑加速競賽
+（English: COMPETITION.txt　完整規格：README.md）
+
+題目
+  我們給你一支能正確執行的 Dijkstra：dijkstra_foundation.cpp。
+  把它複製成 solver.cpp 並加速。輸出完全相同，時間更短。
+  你快幾倍，就是幾分。
+
+重點
+  繳交      solver.cpp 與 result.json（必須來自同一次執行）
+  網址      https://shortestpaths.ccu2026algorithm.workers.dev
+  截止      2026/09/27 23:59（台北時間），逾時系統拒收
+  分數      六筆測資加速倍率的幾何平均
+  次數      不限，取最佳成績排名
+  限制      C++17、只用標準函式庫、單一檔案、單執行緒、
+            4 GB、每筆測資 3600 秒
+
+四行指令
+  make foundation                        # 編譯基準程式
+  scripts/download_large.sh              # 下載評分測資，185 MB，一次
+  cp dijkstra_foundation.cpp solver.cpp  # 這個檔案就是你的作業
+  make solver                            # ...修改、重新編譯...
+  python3 grade.py --solver ./solver --instances instances.txt \
+      --json result.json                 # 評分
+
+  「Overall geomean」那一行就是你的分數。開始前先用 make check-data
+  確認編譯環境。完整評分光基準程式就要跑約 1.7 小時 CPU，開發請用
+  instances_dev.txt（約 1.5 分鐘）；只有 instances.txt 計分。
+
+六筆評分測資
+  六張圖刻意各不相同：在某張圖上有效的技巧，換一張可能完全沒用。
+  兩筆屬於 LOCAL（短距離查詢為主），四筆屬於 GLOBAL（長距離為主）。
+  各筆細節見 instances/*.meta.json。
+
+  road2d_large     GLOBAL   300,304 點  1,629,732 邊  200,000 查詢
+      有向道路網，附座標，8% 單行道。目標落在 Dijkstra rank 2^8-2^17。
+  lattice3d_large  GLOBAL   300,763 點    902,289 邊   30,000 查詢
+      三維環面格子圖，分支度 6，無座標，權重 1-10^6。均勻隨機點對。
+  local2d_large    LOCAL    300,304 點    600,608 邊  300,000 查詢
+      二維環面格子圖，權重 1-1000。90% 為短程查詢（目標在 rank 4096
+      以內），10% 均勻隨機。
+  scalefree_large  GLOBAL   300,000 點    873,003 邊   50,000 查詢
+      有向無尺度圖，3% 的點是 sink，權重 1-10^4。70% 均勻隨機、
+      30% 指向前 0.1% 樞紐點；約 3% 的目標不可達（須輸出 -1）。
+  hugeq_large      GLOBAL    50,176 點    271,492 邊  600,000 查詢
+      同一張小型道路網，但有 60 萬筆均勻隨機查詢。
+  wide64_large     LOCAL   1,999,396 點  3,998,792 邊  30,000 查詢
+      二維環面格子圖，權重 10^8-10^9。距離超過 2^32，用 32 位元存會
+      無聲溢位。六筆中最大的一張圖。
+
+  每筆約 0.1% 的查詢是 s == t（答案 0）。最終評分使用同一份產生器、
+  不同亂數種子產生的全新測資，因此依賴釋出檔案確切內容的做法無效。
+
+分數怎麼算
+  每筆測資：加速倍率 = T_base / T_solver，兩者都由 grade.py 在你自己
+  的機器、同一次執行中量測，所以機器快慢會被約掉。
+  分數 = (s1 * s2 * s3 * s4 * s5 * s6) ^ (1/6)。
+
+  沒有上限：快 400 倍就是 400 分。
+  失敗的測資一律以 0.1 計且不剔除。以 README 的示範為例，五筆正確的
+  測資本身值約 49 倍，但一筆 WRONG 就把分數壓到 17.4 倍。
+  先求正確，再求快。
+  失敗類型：WRONG、TIMEOUT（3600 秒）、MEMORY（4 GB）、THREADS、
+  NONDETERMINISTIC、CRASH、NOOUTPUT，全部以 0.1 計。
+  T_base 由短前綴外插估計（對每位同學是同一常數，排名中互相抵消）；
+  你的程式會跑三次，取最快的一次。
+
+競賽規則
+  1. solver.cpp 必須是 dijkstra_foundation.cpp 的修改版，不可重寫。
+  2. 維持命令列：./solver <graph> <queries> <output>。
+  3. 輸出必須與基準程式完全一致（不可達輸出 -1）。
+  4. C++17，只能用標準函式庫。
+  5. 單一檔案，不可自己開標頭檔。
+  6. 單執行緒。
+  7. 記憶體 4 GB 以內，每筆測資 3600 秒以內。
+  8. 不得內含預先算好的答案。
+  不可修改 dijkstra_foundation.cpp、grade.py 或 instances/。
+  第 3、6、7 條由 grade.py 自動強制；第 1、4、5、8 條由人閱讀你的
+  solver.cpp 認定——這就是原始碼要跟成績一起上傳的原因。
+
+繳交網站
+  https://shortestpaths.ccu2026algorithm.workers.dev
+  架在 Cloudflare 上的公開排行榜：免登入、免 VPN，哪裡都能連。
+
+  排行榜上有即時倒數、固定在 1.00x 的基準程式列，以及每位同學一列：
+  總分、Global 與 Local 平均、六筆測資各自的加速倍率、嘗試次數與最近
+  上傳時間。Overall / Global / Local 可切換排名依據，Overall 為正式
+  排名。學號會公開顯示，原始碼不會。
+
+  上傳方式：點右上角 Submit，填入與課程名單完全一致的學號，選擇
+  result.json 與 solver.cpp，按「Submit and view ranking」。
+
+  伺服器會用 result.json 內的各筆時間重新推導分數，所以不是
+  grade.py --json 產生的檔案、或數字兜不起來的檔案都會被退回。
+  result.json 內記錄了它所量測那份 solver.cpp 的 SHA-256，兩個檔案
+  必須來自同一次執行。你的 solver.cpp 只有授課教師看得到。
+
+  請早點傳、常常傳：傳壞沒有任何懲罰，只取最佳成績。不要拖到最後一
+  小時，完整評分本身就要跑很久。
+
+上傳前確認
+  make check-data 顯示 ok；git diff dijkstra_foundation.cpp 無輸出；
+  評分測資六列全部 ok；上傳的是那一次的 result.json 與那一份
+  solver.cpp。
+
+有疑問請在截止前詢問，不要自己猜。本頁與 README.md 有出入時，
+以 README.md 為準。

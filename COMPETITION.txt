@@ -1,0 +1,116 @@
+SHORTEST-PATH SPEED COMPETITION
+(Chinese version: COMPETITION.zh-TW.txt   Full spec: README.md)
+
+THE TASK
+  You are given a working Dijkstra, dijkstra_foundation.cpp. Copy it to
+  solver.cpp and make it faster. Same output, less time. How many times
+  faster you are IS your score.
+
+KEY FACTS
+  Hand in    solver.cpp and result.json (both from the same run)
+  Where      https://shortestpaths.ccu2026algorithm.workers.dev
+  Deadline   27 Sep 2026, 23:59 Taipei. Late uploads are refused.
+  Score      geometric mean of your six speedups over the baseline
+  Tries      unlimited; your best score ranks
+  Limits     C++17, standard library only, single file, single thread,
+             4 GB, 3600 s per instance
+
+FOUR COMMANDS
+  make foundation                        # build the baseline
+  scripts/download_large.sh              # scored data, 185 MB, once
+  cp dijkstra_foundation.cpp solver.cpp  # this file is your assignment
+  make solver                            # ...edit, rebuild...
+  python3 grade.py --solver ./solver --instances instances.txt \
+      --json result.json                 # score
+
+  The "Overall geomean" line is your score. Check your toolchain first
+  with "make check-data". The scored run costs the baseline about 1.7 h
+  of CPU, so develop against instances_dev.txt (~1.5 min); only
+  instances.txt is scored.
+
+THE SIX SCORED DATASETS
+  Each is a different kind of graph: a trick that wins on one may do
+  nothing on the next. Two are LOCAL (short-range queries), four are
+  GLOBAL (long-range). Per-instance details are in instances/*.meta.json.
+
+  road2d_large     GLOBAL   300,304 V  1,629,732 E  200,000 Q
+      Directed road network with coordinates, 8% one-way. Targets at
+      Dijkstra ranks 2^8-2^17.
+  lattice3d_large  GLOBAL   300,763 V    902,289 E   30,000 Q
+      3-D torus lattice, degree 6, no coordinates, weights 1-10^6.
+      Uniform random pairs.
+  local2d_large    LOCAL    300,304 V    600,608 E  300,000 Q
+      2-D torus lattice, weights 1-1000. 90% of queries are short-range
+      (target within rank 4096), 10% uniform.
+  scalefree_large  GLOBAL   300,000 V    873,003 E   50,000 Q
+      Directed power-law graph, 3% sinks, weights 1-10^4. 70% uniform,
+      30% into the top 0.1% hubs; ~3% of targets unreachable (print -1).
+  hugeq_large      GLOBAL    50,176 V    271,492 E  600,000 Q
+      The small road graph, but 600,000 uniform queries.
+  wide64_large     LOCAL   1,999,396 V  3,998,792 E  30,000 Q
+      2-D torus lattice, weights 10^8-10^9. Distances exceed 2^32, so
+      32-bit distances overflow silently. Largest graph in the set.
+
+  About 0.1% of queries have s == t (answer 0). The final grading uses
+  fresh instances from the same generator with a different seed, so
+  depending on the exact bytes of the released files will not carry over.
+
+HOW THE SCORE WORKS
+  Per instance:  speedup = T_base / T_solver, both timed by grade.py on
+  your own machine in the same run, so machine speed cancels out.
+  Score = (s1 * s2 * s3 * s4 * s5 * s6) ^ (1/6).
+
+  No cap: 400x faster scores 400.
+  A failed instance scores 0.1 and is never dropped. In the README's
+  example, five good instances are worth ~49x but one WRONG pulls the
+  score down to 17.4x. Correctness first, then speed.
+  Failure notes: WRONG, TIMEOUT (3600 s), MEMORY (4 GB), THREADS,
+  NONDETERMINISTIC, CRASH, NOOUTPUT -- all 0.1.
+  T_base is extrapolated from short probes (same constant for everyone,
+  cancels in the ranking); your solver is run 3 times, best time kept.
+
+THE RULES
+  1. solver.cpp must be a modified copy of dijkstra_foundation.cpp,
+     not a rewrite.
+  2. Keep the command line: ./solver <graph> <queries> <output>.
+  3. Output exactly what the baseline outputs (-1 if unreachable).
+  4. C++17, standard library only.
+  5. One file. No headers of your own.
+  6. Single-threaded.
+  7. Under 4 GB and 3600 s per instance.
+  8. No precomputed answers.
+  Do not edit dijkstra_foundation.cpp, grade.py, or instances/.
+  grade.py enforces 3, 6 and 7; 1, 4, 5 and 8 are checked by reading
+  your solver.cpp -- which is why the source is uploaded with the score.
+
+THE SUBMISSION SITE
+  https://shortestpaths.ccu2026algorithm.workers.dev
+  A public scoreboard on Cloudflare: no account, no VPN, works anywhere.
+
+  The board shows a live countdown, the pinned baseline row at 1.00x,
+  and one row per student: overall score, Global and Local means, all
+  six per-instance speedups, tries, and last upload time. Overall /
+  Global / Local switch the ranking key; Overall is the official one.
+  Student IDs are public; your source code is not.
+
+  To upload: click Submit (top right), enter your Student ID exactly as
+  in the course roster, choose result.json and solver.cpp, then click
+  "Submit and view ranking".
+
+  The server re-derives your score from the times in result.json, so
+  files not produced by "grade.py --json", or whose numbers do not add
+  up, are rejected. result.json stores the SHA-256 of the solver.cpp it
+  measured, so the two files must come from the same run. Your
+  solver.cpp is kept for the instructor only.
+
+  Submit early and often -- a bad attempt costs nothing, and only your
+  best score ranks. Do not leave it to the last hour: a full scored run
+  takes a long time.
+
+BEFORE YOU UPLOAD
+  make check-data says ok; git diff dijkstra_foundation.cpp is empty;
+  all six rows of the scored run say ok; and you upload that
+  result.json together with that solver.cpp.
+
+Questions: ask before the deadline rather than guessing. Where this
+page and README.md disagree, README.md wins.
