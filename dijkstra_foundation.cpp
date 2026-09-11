@@ -3,7 +3,7 @@
 // Foundation Dijkstra implementation for the Shortest-Path Competition.
 //
 // Students must build their solver by modifying and extending this file.
-// See docs/superpowers/specs/2026-05-12-shortest-path-competition-design.md.
+// The authoritative description of the formats and the rules is README.md.
 //
 // Usage:
 //     ./solver <graph_file> <query_file> <output_file>
@@ -11,15 +11,25 @@
 // File formats (0-based vertex indices):
 //
 //   <graph_file>
-//     V E HAS_COORDS
+//     V E FLAGS
 //     u_1 v_1 w_1
 //     ...
 //     u_E v_E w_E
-//     [ if HAS_COORDS == 1:
+//     [ if FLAGS has bit 0 set:
 //       x_0 y_0
 //       ...
 //       x_{V-1} y_{V-1}
 //     ]
+//
+//   FLAGS is a bitmask:
+//     bit 0 (value 1) — the coordinate block is present
+//     bit 1 (value 2) — the edge list is DIRECTED: "u v w" is the arc u -> v
+//                       only. When the bit is clear the graph is undirected and
+//                       each line contributes both u -> v and v -> u.
+//   A FLAGS value of 0 or 1 therefore means exactly what HAS_COORDS used to.
+//
+//   Coordinates are integers in the v2 datasets (they are still read as
+//   floating point here, so both integer and decimal text parse correctly).
 //
 //   <query_file>
 //     Q
@@ -32,6 +42,7 @@
 //     ...
 //     d_Q                 (-1 if t_i unreachable from s_i)
 
+#include <algorithm>
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
@@ -45,9 +56,12 @@ struct Edge {
     int32_t w;
 };
 
+static const int32_t FLAG_COORDS   = 1;
+static const int32_t FLAG_DIRECTED = 2;
+
 static int32_t V = 0;
 static int32_t E = 0;
-static int32_t HAS_COORDS = 0;
+static int32_t FLAGS = 0;
 static vector<vector<Edge>> adj;
 static vector<double> coord_x, coord_y;
 
@@ -55,9 +69,10 @@ static void read_graph(const char* path) {
     std::FILE* f = std::fopen(path, "r");
     if (!f) { std::fprintf(stderr, "cannot open graph file: %s\n", path); std::exit(1); }
 
-    if (std::fscanf(f, "%d %d %d", &V, &E, &HAS_COORDS) != 3) {
+    if (std::fscanf(f, "%d %d %d", &V, &E, &FLAGS) != 3) {
         std::fprintf(stderr, "bad graph header\n"); std::exit(1);
     }
+    const bool directed = (FLAGS & FLAG_DIRECTED) != 0;
     adj.assign(V, {});
     for (int32_t i = 0; i < E; ++i) {
         int32_t u, v, w;
@@ -65,9 +80,9 @@ static void read_graph(const char* path) {
             std::fprintf(stderr, "bad edge at line %d\n", i + 2); std::exit(1);
         }
         adj[u].push_back({v, w});
-        adj[v].push_back({u, w});
+        if (!directed) adj[v].push_back({u, w});
     }
-    if (HAS_COORDS) {
+    if (FLAGS & FLAG_COORDS) {
         coord_x.resize(V);
         coord_y.resize(V);
         for (int32_t i = 0; i < V; ++i) {

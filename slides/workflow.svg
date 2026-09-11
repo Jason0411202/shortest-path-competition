@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 640" width="1400" height="640" role="img" aria-labelledby="t d">
+  <title id="t">How the competition works: your solver.cpp and the test data go into grade.py; a score table and result.json come out</title>
+  <desc id="d">You write solver.cpp. grade.py runs it on the six test instances and prints, per instance, the baseline time, your time, the speedup and a correctness note, then the geometric mean, which is your score. It also writes result.json, which you hand in.</desc>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#14324D"/>
+    </marker>
+  </defs>
+  <style>
+    .s  { font-family:"Inter","Helvetica Neue",Helvetica,Arial,sans-serif; }
+    .m  { font-family:"SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace; }
+    .h  { font-size:17px; font-weight:700; fill:#14324D; }
+    .b  { font-size:14px; fill:#1B1B1B; }
+    .sm { font-size:12.5px; fill:#6B6B6B; }
+    .lbl{ font-size:12px; font-weight:700; fill:#0E7490; letter-spacing:0.5px; }
+    .tt { font-size:13px; fill:#1B1B1B; }
+    .th { font-size:12px; font-weight:700; fill:#6B6B6B; }
+    .acc{ fill:#C2410C; font-weight:700; }
+    .bad{ fill:#B3261E; font-weight:700; }
+  </style>
+  <rect width="1400" height="640" fill="#FFFFFF"/>
+
+  <!-- ===== 1. you write one file ===== -->
+  <rect x="20" y="20" width="320" height="230" rx="10" fill="#F7F9FA" stroke="#DDE7EC"/>
+  <circle cx="46" cy="46" r="13" fill="#0E7490"/><text class="s" x="46" y="51" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF">1</text>
+  <text class="s h" x="68" y="51">You write one file</text>
+
+  <rect x="44" y="72" width="150" height="40" rx="6" fill="#F2F1ED" stroke="#DCDBD6"/>
+  <text class="m" x="119" y="97" text-anchor="middle" font-size="12" fill="#14324D">dijkstra_foundation.cpp</text>
+  <text class="s sm" x="204" y="86">given —</text>
+  <text class="s sm" x="204" y="101">do not edit</text>
+
+  <path d="M119,112 L119,134" stroke="#14324D" stroke-width="1.8" marker-end="url(#ar)" fill="none"/>
+  <text class="s sm" x="130" y="128">cp, then make it faster</text>
+
+  <rect x="44" y="140" width="150" height="44" rx="6" fill="#FFF4EC" stroke="#C2410C" stroke-width="1.5"/>
+  <text class="m" x="119" y="167" text-anchor="middle" font-size="15" fill="#C2410C" font-weight="700">solver.cpp</text>
+  <text class="s b" x="204" y="157">the whole</text>
+  <text class="s b" x="204" y="174">assignment</text>
+
+  <path d="M119,184 L119,206" stroke="#14324D" stroke-width="1.8" marker-end="url(#ar)" fill="none"/>
+  <text class="s sm" x="130" y="200"><tspan class="m">make solver</tspan></text>
+  <rect x="44" y="212" width="150" height="26" rx="5" fill="#14324D"/>
+  <text class="m" x="119" y="230" text-anchor="middle" font-size="13" fill="#FFFFFF">./solver</text>
+  <text class="s sm" x="204" y="230">same I/O, faster</text>
+
+  <!-- ===== 2. test data ===== -->
+  <rect x="20" y="280" width="320" height="340" rx="10" fill="#F7F9FA" stroke="#DDE7EC"/>
+  <circle cx="46" cy="306" r="13" fill="#0E7490"/><text class="s" x="46" y="311" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF">2</text>
+  <text class="s h" x="68" y="311">Test data</text>
+  <text class="s sm" x="160" y="311"><tspan class="m">instances/</tspan> · six graphs</text>
+
+  <g class="m" font-size="12.5" fill="#14324D">
+    <rect x="44" y="330" width="272" height="26" rx="5" fill="#FFFFFF" stroke="#E3E2DD"/><text x="56" y="348">road2d_large</text>
+    <rect x="44" y="362" width="272" height="26" rx="5" fill="#FFFFFF" stroke="#E3E2DD"/><text x="56" y="380">lattice3d_large</text>
+    <rect x="44" y="394" width="272" height="26" rx="5" fill="#FFFFFF" stroke="#E3E2DD"/><text x="56" y="412">local2d_large</text>
+    <rect x="44" y="426" width="272" height="26" rx="5" fill="#FFFFFF" stroke="#E3E2DD"/><text x="56" y="444">scalefree_large</text>
+    <rect x="44" y="458" width="272" height="26" rx="5" fill="#FFFFFF" stroke="#E3E2DD"/><text x="56" y="476">hugeq_large</text>
+    <rect x="44" y="490" width="272" height="26" rx="5" fill="#FFFFFF" stroke="#E3E2DD"/><text x="56" y="508">wide64_large</text>
+  </g>
+  <text class="s sm" x="44" y="538">each = <tspan class="m">.graph</tspan> + <tspan class="m">.queries</tspan> + <tspan class="m">.answers</tspan> (the key)</text>
+  <text class="s sm" x="44" y="566">Download once, 185 MB:</text>
+  <rect x="44" y="576" width="272" height="26" rx="5" fill="#F2F1ED"/>
+  <text class="m" x="56" y="594" font-size="12.5" fill="#14324D">scripts/download_large.sh</text>
+
+  <!-- ===== grade.py ===== -->
+  <path d="M340,225 C 370,225 360,300 386,300" stroke="#14324D" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+  <path d="M340,420 C 370,420 360,352 386,352" stroke="#14324D" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+
+  <rect x="392" y="240" width="286" height="170" rx="12" fill="#14324D"/>
+  <text class="s" x="535" y="278" text-anchor="middle" font-size="24" font-weight="700" fill="#FFFFFF">grade.py</text>
+  <text class="s" x="535" y="300" text-anchor="middle" font-size="12.5" fill="#AEC4D6">one command does everything</text>
+  <rect x="400" y="316" width="270" height="78" rx="6" fill="#0D2438"/>
+  <text class="m" x="410" y="338" font-size="11" fill="#FFFFFF">python3 grade.py --solver ./solver \</text>
+  <text class="m" x="410" y="360" font-size="11" fill="#BFD6E6">    --instances instances.txt \</text>
+  <text class="m" x="410" y="382" font-size="11" fill="#BFD6E6">    --json result.json</text>
+
+  <path d="M678,325 L716,325" stroke="#14324D" stroke-width="2.5" fill="none" marker-end="url(#ar)"/>
+
+  <!-- ===== 3. what you get back ===== -->
+  <rect x="722" y="20" width="658" height="600" rx="10" fill="#F7F9FA" stroke="#DDE7EC"/>
+  <circle cx="748" cy="46" r="13" fill="#0E7490"/><text class="s" x="748" y="51" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF">3</text>
+  <text class="s h" x="770" y="51">What you get back</text>
+  <text class="s sm" x="940" y="51">printed to the terminal, and written to <tspan class="m">result.json</tspan></text>
+
+  <!-- terminal -->
+  <rect x="746" y="68" width="610" height="262" rx="8" fill="#FFFFFF" stroke="#DCDBD6"/>
+  <rect x="746" y="68" width="610" height="22" rx="8" fill="#ECEBE6"/>
+  <rect x="746" y="82" width="610" height="8" fill="#ECEBE6"/>
+  <circle cx="760" cy="79" r="4" fill="#D9534F"/><circle cx="773" cy="79" r="4" fill="#E8B84A"/><circle cx="786" cy="79" r="4" fill="#5CB85C"/>
+  <text class="s" x="1051" y="83" text-anchor="middle" font-size="11" fill="#6B6B6B">example output — an improved solver, wrong on one instance</text>
+
+  <g class="m th" font-size="12">
+    <text x="762" y="114">category</text>
+    <text x="838" y="114">instance</text>
+    <text x="1080" y="114" text-anchor="end">T_base</text>
+    <text x="1160" y="114" text-anchor="end">T_solver</text>
+    <text x="1250" y="114" text-anchor="end">speedup</text>
+    <text x="1270" y="114">note</text>
+  </g>
+  <line x1="758" y1="122" x2="1344" y2="122" stroke="#E3E2DD"/>
+
+  <!-- highlight bands -->
+  <rect x="1174" y="126" width="80" height="150" rx="4" fill="#FFF4EC"/>
+  <rect x="756" y="252" width="590" height="24" rx="4" fill="#FBEAEA"/>
+
+  <g class="m tt" font-size="13">
+    <text x="762" y="146">GLOBAL</text><text x="838" y="146">road2d_large</text>
+    <text x="1080" y="146" text-anchor="end">733.1</text><text x="1160" y="146" text-anchor="end">6.9</text>
+    <text x="1250" y="146" text-anchor="end" font-weight="700">106.2</text><text x="1270" y="146" fill="#2E7D32">ok</text>
+
+    <text x="762" y="171">GLOBAL</text><text x="838" y="171">lattice3d_large</text>
+    <text x="1080" y="171" text-anchor="end">1034.2</text><text x="1160" y="171" text-anchor="end">412.6</text>
+    <text x="1250" y="171" text-anchor="end" font-weight="700">2.5</text><text x="1270" y="171" fill="#2E7D32">ok</text>
+
+    <text x="762" y="196">LOCAL</text><text x="838" y="196">local2d_large</text>
+    <text x="1080" y="196" text-anchor="end">870.5</text><text x="1160" y="196" text-anchor="end">14.2</text>
+    <text x="1250" y="196" text-anchor="end" font-weight="700">61.3</text><text x="1270" y="196" fill="#2E7D32">ok</text>
+
+    <text x="762" y="221">GLOBAL</text><text x="838" y="221">scalefree_large</text>
+    <text x="1080" y="221" text-anchor="end">918.0</text><text x="1160" y="221" text-anchor="end">10.1</text>
+    <text x="1250" y="221" text-anchor="end" font-weight="700">90.9</text><text x="1270" y="221" fill="#2E7D32">ok</text>
+
+    <text x="762" y="246">GLOBAL</text><text x="838" y="246">hugeq_large</text>
+    <text x="1080" y="246" text-anchor="end">1550.3</text><text x="1160" y="246" text-anchor="end">8.4</text>
+    <text x="1250" y="246" text-anchor="end" font-weight="700">184.6</text><text x="1270" y="246" fill="#2E7D32">ok</text>
+
+    <text x="762" y="270">LOCAL</text><text x="838" y="270">wide64_large</text>
+    <text x="1080" y="270" text-anchor="end">-</text><text x="1160" y="270" text-anchor="end">-</text>
+    <text x="1250" y="270" text-anchor="end" class="bad">0.1</text><text x="1270" y="270" class="bad">WRONG</text>
+  </g>
+  <line x1="758" y1="284" x2="1344" y2="284" stroke="#E3E2DD"/>
+  <rect x="756" y="294" width="590" height="26" rx="4" fill="#FFF4EC"/>
+  <text class="m" x="762" y="313" font-size="14" fill="#1B1B1B">Overall   geomean = <tspan class="acc" font-size="15">17.4</tspan>   (n=6)</text>
+  <text class="s" x="1344" y="313" text-anchor="end" font-size="13" font-weight="700" fill="#C2410C">← your score</text>
+
+  <!-- how to read it -->
+  <text class="s lbl" x="746" y="362">HOW TO READ IT</text>
+
+  <rect x="746" y="374" width="10" height="10" rx="2" fill="#FFF4EC" stroke="#F0C9A8"/>
+  <text class="s b" x="766" y="384"><tspan font-weight="700">speedup</tspan> = T_base / T_solver: how many times faster than the untouched foundation,</text>
+  <text class="s b" x="766" y="402">on your machine. T_base is the foundation's time, measured by grade.py. Times are seconds.</text>
+
+  <rect x="746" y="420" width="10" height="10" rx="2" fill="#FFF4EC" stroke="#F0C9A8"/>
+  <text class="s b" x="766" y="430"><tspan font-weight="700">Overall geomean</tspan> is your score — the geometric mean of the six speedups. There is no cap.</text>
+
+  <rect x="746" y="448" width="10" height="10" rx="2" fill="#FBEAEA" stroke="#E4B4B4"/>
+  <text class="s b" x="766" y="458"><tspan font-weight="700">note ≠ ok</tspan> means that instance scores 0.1 and still counts. Here one WRONG answer turned a</text>
+  <text class="s b" x="766" y="476">score of about 49 into 17.4. Get every instance correct first, then make it fast.</text>
+  <text class="s sm" x="766" y="494">Other notes: TIMEOUT · MEMORY · THREADS · NONDETERMINISTIC · CRASH — all score 0.1.</text>
+
+  <!-- hand in -->
+  <line x1="746" y1="514" x2="1356" y2="514" stroke="#E3E2DD"/>
+  <text class="s lbl" x="746" y="542">HAND IN</text>
+  <rect x="820" y="526" width="112" height="26" rx="5" fill="#FFF4EC" stroke="#C2410C"/>
+  <text class="m" x="876" y="544" text-anchor="middle" font-size="12.5" fill="#C2410C" font-weight="700">solver.cpp</text>
+  <rect x="944" y="526" width="112" height="26" rx="5" fill="#F2F1ED" stroke="#DCDBD6"/>
+  <text class="m" x="1000" y="544" text-anchor="middle" font-size="12.5" fill="#14324D">result.json</text>
+  <text class="s sm" x="1070" y="544">— that's all. Plus <tspan class="m">Makefile</tspan> only if you changed it.</text>
+  <text class="s sm" x="746" y="578"><tspan class="m">result.json</tspan> already records your times, the baseline times and the score.</text>
+  <text class="s sm" x="746" y="598">The small <tspan class="m">*_dev</tspan> set (already in the repo) is for quick checks; only <tspan class="m">instances.txt</tspan> is scored.</text>
+</svg>

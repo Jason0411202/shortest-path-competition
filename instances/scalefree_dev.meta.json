@@ -1,0 +1,72 @@
+{
+  "E": 145587,
+  "Q": 10000,
+  "V": 50000,
+  "argv": "--manifest tools/manifest/public.json --instance scalefree_dev --out instances",
+  "component_sizes_top10": [
+    50000
+  ],
+  "directed": true,
+  "distinct_sources": 10000,
+  "distinct_sources_policy": "strict",
+  "family": "scalefree",
+  "family_detail": {
+    "components_merged": 0,
+    "gamma": 2.1,
+    "m": 3,
+    "max_indegree": 2173,
+    "n_sinks": 1471,
+    "sink_frac": 0.03,
+    "weights": "loguniform:1:10000",
+    "zero_indegree_nodes": 0
+  },
+  "flags": 2,
+  "generator_version": 2,
+  "has_coords": false,
+  "lambda_admissible": null,
+  "n_components": 1,
+  "name": "scalefree_dev",
+  "params": {
+    "V": 50000,
+    "gamma": 2.1,
+    "m": 3,
+    "sink_frac": 0.03,
+    "weights": "loguniform:1:10000"
+  },
+  "probe": {
+    "astar_reduction": null,
+    "reason": "no coords"
+  },
+  "query_counts": {
+    "hub": 2997,
+    "pair": 10000,
+    "rank": 0,
+    "selfpair": 10
+  },
+  "query_mix": "uniform:0.7,hub:0.3",
+  "resolve": {
+    "Q": 10000,
+    "fits_uint32": true,
+    "max_finite_distance": 23989,
+    "rank_truncated": 0,
+    "unreachable": 289
+  },
+  "salt": "public",
+  "seed": 20260901,
+  "sha256": {
+    "answers": "fcf169878319b9175ca9383390d58a338eed87522840c2e86d8864d81ecb675a",
+    "graph": "b13e0e79d807b0c195846253d601e4f4f8d81e0d03dd006d52d0a9257716f3b5",
+    "queries": "c0fe44491639f6184cd189d3cc7b84516f86032adebe4f99ffcc15a442db0bcf"
+  },
+  "verify": {
+    "failures": 0,
+    "fits_uint32": true,
+    "max_finite_distance": 23989,
+    "sampled": 5000,
+    "unreachable": 289,
+    "unreachable_confirmed": 200,
+    "unreachable_frac": 0.0289
+  },
+  "w_max": 9999,
+  "w_min": 1
+}

@@ -15,7 +15,7 @@ ifeq ($(UNAME_S),Darwin)
     endif
 endif
 
-.PHONY: all foundation solver clean
+.PHONY: all foundation solver tools test check-data clean
 
 all: foundation
 
@@ -27,5 +27,29 @@ foundation: dijkstra_foundation.cpp
 solver: solver.cpp
 	$(CXX) $(CXXFLAGS) -o solver solver.cpp
 
+# --- instructor / tooling targets ------------------------------------------
+
+# The reference solver used to produce the answer keys. Multi-threaded on
+# purpose: the competition's single-thread rule applies to submissions.
+tools:
+	$(MAKE) -C tools/ref
+
+# Regression tests for grade.py (uncapped scoring, the wrong-answer accounting,
+# the enforced limits, and baseline extrapolation vs a full run).
+test: foundation
+	python3 tools/test_grade.py
+
+# Cross-check every committed instance's answer key against the unmodified
+# foundation. This is the two-independent-implementations check: refsolve and
+# dijkstra_foundation share no code.
+check-data: foundation
+	@set -e; for g in instances/*_dev.graph; do \
+	  n=$${g%.graph}; \
+	  ./foundation $$g $$n.queries /tmp/.chk.out; \
+	  if cmp -s /tmp/.chk.out $$n.answers; then echo "ok    $$n"; \
+	  else echo "WRONG $$n"; exit 1; fi; \
+	done; rm -f /tmp/.chk.out; echo "all answer keys match the foundation"
+
 clean:
 	rm -f foundation solver
+	$(MAKE) -C tools/ref clean

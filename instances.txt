@@ -1,0 +1,8 @@
+# The scored set. Download it first:  scripts/download_large.sh
+# <category> <graph> <queries>
+GLOBAL   instances/road2d_large.graph      instances/road2d_large.queries
+GLOBAL   instances/lattice3d_large.graph   instances/lattice3d_large.queries
+LOCAL    instances/local2d_large.graph     instances/local2d_large.queries
+GLOBAL   instances/scalefree_large.graph   instances/scalefree_large.queries
+GLOBAL   instances/hugeq_large.graph       instances/hugeq_large.queries
+LOCAL    instances/wide64_large.graph      instances/wide64_large.queries

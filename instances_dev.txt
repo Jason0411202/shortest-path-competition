@@ -1,0 +1,8 @@
+# Dev tier: small, committed to the repo, for quick checks while you work.
+# <category> <graph> <queries>
+GLOBAL   instances/road2d_dev.graph      instances/road2d_dev.queries
+GLOBAL   instances/lattice3d_dev.graph   instances/lattice3d_dev.queries
+LOCAL    instances/local2d_dev.graph     instances/local2d_dev.queries
+GLOBAL   instances/scalefree_dev.graph   instances/scalefree_dev.queries
+GLOBAL   instances/hugeq_dev.graph       instances/hugeq_dev.queries
+LOCAL    instances/wide64_dev.graph      instances/wide64_dev.queries

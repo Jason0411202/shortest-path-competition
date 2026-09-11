@@ -1,0 +1,184 @@
+{
+  "_comment": [
+    "Released instance definitions. tools/manifest/hidden.json MUST be identical",
+    "except for seed and salt -- run `python3 -m tools.gen --compare-manifests",
+    "tools/manifest/public.json tools/manifest/hidden.json` to verify.",
+    "",
+    "Tiers: _dev is committed to the repo; the unmodified foundation finishes it",
+    "in ~1.5 min total, so it doubles as the correctness suite. _large is the",
+    "downloadable scored set. Q is calibrated so the unmodified foundation needs",
+    "about 1.7 h CPU for the whole tier and under 30 min per instance (measured",
+    "2026-09-11 on an Apple-silicon laptop), so a first submission never times out.",
+    "Under that budget, smaller graphs buy more queries per hour, which is what",
+    "lets the query phase outweigh preprocessing; wide64 keeps the 2M-node graph",
+    "because it exists to break 32-bit distances and to test memory discipline."
+  ],
+  "seed": 20260901,
+  "salt": "public",
+  "instances": {
+    "road2d_dev": {
+      "family": "road2d",
+      "params": {
+        "V": 50176,
+        "directed": true,
+        "oneway_frac": 0.08,
+        "arterial_stride": 8,
+        "highway_stride": 64
+      },
+      "Q": 10000,
+      "mix": "rank:6-15",
+      "distinct_sources": "strict",
+      "expect_components": 1
+    },
+    "lattice3d_dev": {
+      "family": "lattice",
+      "params": {
+        "dim": 3,
+        "n": 37,
+        "torus": true,
+        "weights": "loguniform:1:1000000"
+      },
+      "Q": 10000,
+      "mix": "uniform:1.0",
+      "distinct_sources": "strict",
+      "expect_components": 1
+    },
+    "local2d_dev": {
+      "family": "lattice",
+      "params": {
+        "dim": 2,
+        "n": 224,
+        "torus": true,
+        "weights": "uniform:1:1000"
+      },
+      "Q": 10000,
+      "mix": "local:0.9@4096,uniform:0.1",
+      "distinct_sources": "strict",
+      "expect_components": 1
+    },
+    "scalefree_dev": {
+      "family": "scalefree",
+      "params": {
+        "V": 50000,
+        "m": 3,
+        "gamma": 2.1,
+        "sink_frac": 0.03,
+        "weights": "loguniform:1:10000"
+      },
+      "Q": 10000,
+      "mix": "uniform:0.7,hub:0.3",
+      "hub_frac": 0.001,
+      "distinct_sources": "strict",
+      "expect_components": 1
+    },
+    "hugeq_dev": {
+      "family": "road2d",
+      "params": {
+        "V": 50176,
+        "directed": true,
+        "oneway_frac": 0.08,
+        "arterial_stride": 8,
+        "highway_stride": 64
+      },
+      "Q": 10000,
+      "mix": "uniform:1.0",
+      "distinct_sources": "balanced",
+      "expect_components": 1
+    },
+    "wide64_dev": {
+      "family": "lattice",
+      "params": {
+        "dim": 2,
+        "n": 224,
+        "torus": true,
+        "weights": "loguniform:100000000:1000000000"
+      },
+      "Q": 10000,
+      "mix": "rank:8-15",
+      "distinct_sources": "strict",
+      "expect_components": 1
+    },
+    "hugeq_large": {
+      "family": "road2d",
+      "params": {
+        "V": 50176,
+        "directed": true,
+        "oneway_frac": 0.08,
+        "arterial_stride": 8,
+        "highway_stride": 64
+      },
+      "Q": 600000,
+      "mix": "uniform:1.0",
+      "distinct_sources": "balanced",
+      "expect_components": 1
+    },
+    "road2d_large": {
+      "family": "road2d",
+      "params": {
+        "V": 300304,
+        "directed": true,
+        "oneway_frac": 0.08,
+        "arterial_stride": 16,
+        "highway_stride": 128
+      },
+      "Q": 200000,
+      "mix": "rank:8-17",
+      "distinct_sources": "strict",
+      "expect_components": 1
+    },
+    "local2d_large": {
+      "family": "lattice",
+      "params": {
+        "dim": 2,
+        "n": 548,
+        "torus": true,
+        "weights": "uniform:1:1000"
+      },
+      "Q": 300000,
+      "mix": "local:0.9@4096,uniform:0.1",
+      "distinct_sources": "balanced",
+      "expect_components": 1
+    },
+    "scalefree_large": {
+      "family": "scalefree",
+      "params": {
+        "V": 300000,
+        "m": 3,
+        "gamma": 2.1,
+        "sink_frac": 0.03,
+        "weights": "loguniform:1:10000"
+      },
+      "Q": 50000,
+      "mix": "uniform:0.7,hub:0.3",
+      "hub_frac": 0.001,
+      "distinct_sources": "strict",
+      "expect_components": 1
+    },
+    "lattice3d_large": {
+      "family": "lattice",
+      "params": {
+        "dim": 3,
+        "n": 67,
+        "torus": true,
+        "weights": "loguniform:1:1000000"
+      },
+      "Q": 30000,
+      "mix": "uniform:1.0",
+      "distinct_sources": "strict",
+      "expect_components": 1
+    },
+    "wide64_large": {
+      "family": "lattice",
+      "params": {
+        "dim": 2,
+        "n": 1414,
+        "torus": true,
+        "weights": "loguniform:100000000:1000000000"
+      },
+      "Q": 30000,
+      "mix": "rank:12-20",
+      "distinct_sources": "strict",
+      "expect_components": 1
+    }
+  }
+}

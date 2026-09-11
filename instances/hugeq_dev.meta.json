@@ -1,0 +1,79 @@
+{
+  "E": 271492,
+  "Q": 10000,
+  "V": 50176,
+  "argv": "--manifest tools/manifest/public.json --instance hugeq_dev --out instances",
+  "component_sizes_top10": [
+    50176
+  ],
+  "directed": true,
+  "distinct_sources": 10000,
+  "distinct_sources_policy": "balanced",
+  "family": "road2d",
+  "family_detail": {
+    "arterial_stride": 8,
+    "coord_scale": 10000000,
+    "highway_stride": 64,
+    "lattice_side": 224,
+    "lognormal_sigma": 0.35,
+    "oneway_frac": 0.08,
+    "speed_classes": {
+      "arterial": 3.0,
+      "highway": 8.0,
+      "local": 1.0
+    },
+    "time_scale": 16
+  },
+  "flags": 3,
+  "generator_version": 2,
+  "has_coords": true,
+  "lambda_admissible": 0.9931572734342938,
+  "n_components": 1,
+  "name": "hugeq_dev",
+  "params": {
+    "V": 50176,
+    "arterial_stride": 8,
+    "directed": true,
+    "highway_stride": 64,
+    "oneway_frac": 0.08
+  },
+  "probe": {
+    "astar_reduction": 1.437,
+    "lambda_admissible": 0.993157,
+    "mean_settled_astar": 16219.7,
+    "mean_settled_dijkstra": 23301.9,
+    "samples": 200
+  },
+  "query_counts": {
+    "hub": 0,
+    "pair": 10000,
+    "rank": 0,
+    "selfpair": 10
+  },
+  "query_mix": "uniform:1.0",
+  "resolve": {
+    "Q": 10000,
+    "fits_uint32": true,
+    "max_finite_distance": 54063176,
+    "rank_truncated": 0,
+    "unreachable": 0
+  },
+  "salt": "public",
+  "seed": 20260901,
+  "sha256": {
+    "answers": "f2651be26239ece73c5d4fccd36b4de7dc0f2e3ef1ce20a566b5c1d07326f322",
+    "graph": "c352c21dee23d76b1253741697e0ee1608b16c3d782bbbfa4e07f476d326e703",
+    "queries": "b4603d0eba5e5ba8e74de3bb3725b4874d3dd939eae3629aca64ed0fbed4151a"
+  },
+  "verify": {
+    "failures": 0,
+    "fits_uint32": true,
+    "max_finite_distance": 54063176,
+    "sampled": 5000,
+    "unreachable": 0,
+    "unreachable_confirmed": 0,
+    "unreachable_frac": 0.0
+  },
+  "w_max": 3654134,
+  "w_min": 8884
+}

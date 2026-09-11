@@ -1,0 +1,79 @@
+{
+  "E": 271492,
+  "Q": 10000,
+  "V": 50176,
+  "argv": "--manifest tools/manifest/public.json --instance road2d_dev --out instances",
+  "component_sizes_top10": [
+    50176
+  ],
+  "directed": true,
+  "distinct_sources": 10000,
+  "distinct_sources_policy": "strict",
+  "family": "road2d",
+  "family_detail": {
+    "arterial_stride": 8,
+    "coord_scale": 10000000,
+    "highway_stride": 64,
+    "lattice_side": 224,
+    "lognormal_sigma": 0.35,
+    "oneway_frac": 0.08,
+    "speed_classes": {
+      "arterial": 3.0,
+      "highway": 8.0,
+      "local": 1.0
+    },
+    "time_scale": 16
+  },
+  "flags": 3,
+  "generator_version": 2,
+  "has_coords": true,
+  "lambda_admissible": 0.9931572734342938,
+  "n_components": 1,
+  "name": "road2d_dev",
+  "params": {
+    "V": 50176,
+    "arterial_stride": 8,
+    "directed": true,
+    "highway_stride": 64,
+    "oneway_frac": 0.08
+  },
+  "probe": {
+    "astar_reduction": 1.6,
+    "lambda_admissible": 0.993157,
+    "mean_settled_astar": 4692.0,
+    "mean_settled_dijkstra": 7508.5,
+    "samples": 200
+  },
+  "query_counts": {
+    "hub": 0,
+    "pair": 10,
+    "rank": 9990,
+    "selfpair": 10
+  },
+  "query_mix": "rank:6-15",
+  "resolve": {
+    "Q": 10000,
+    "fits_uint32": true,
+    "max_finite_distance": 36525660,
+    "rank_truncated": 0,
+    "unreachable": 0
+  },
+  "salt": "public",
+  "seed": 20260901,
+  "sha256": {
+    "answers": "e6458cf5dee17e4f320c512d8889868b48765c1e67bc65d38a42dff961e50c81",
+    "graph": "c352c21dee23d76b1253741697e0ee1608b16c3d782bbbfa4e07f476d326e703",
+    "queries": "2194af9d36ec630635ac46899ead21e752afda5e2761c858b7bc5dc67c4f0cd2"
+  },
+  "verify": {
+    "failures": 0,
+    "fits_uint32": true,
+    "max_finite_distance": 36525660,
+    "sampled": 5000,
+    "unreachable": 0,
+    "unreachable_confirmed": 0,
+    "unreachable_frac": 0.0
+  },
+  "w_max": 3654134,
+  "w_min": 8884
+}

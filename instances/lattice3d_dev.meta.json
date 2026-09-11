@@ -1,0 +1,68 @@
+{
+  "E": 151959,
+  "Q": 10000,
+  "V": 50653,
+  "argv": "--manifest tools/manifest/public.json --instance lattice3d_dev --out instances",
+  "component_sizes_top10": [
+    50653
+  ],
+  "directed": false,
+  "distinct_sources": 10000,
+  "distinct_sources_policy": "strict",
+  "family": "lattice",
+  "family_detail": {
+    "chord_frac": 0.0,
+    "dim": 3,
+    "side": 37,
+    "torus": true,
+    "weights": "loguniform:1:1000000"
+  },
+  "flags": 0,
+  "generator_version": 2,
+  "has_coords": false,
+  "lambda_admissible": null,
+  "n_components": 1,
+  "name": "lattice3d_dev",
+  "params": {
+    "dim": 3,
+    "n": 37,
+    "torus": true,
+    "weights": "loguniform:1:1000000"
+  },
+  "probe": {
+    "astar_reduction": null,
+    "reason": "no coords"
+  },
+  "query_counts": {
+    "hub": 0,
+    "pair": 10000,
+    "rank": 0,
+    "selfpair": 10
+  },
+  "query_mix": "uniform:1.0",
+  "resolve": {
+    "Q": 10000,
+    "fits_uint32": true,
+    "max_finite_distance": 100926,
+    "rank_truncated": 0,
+    "unreachable": 0
+  },
+  "salt": "public",
+  "seed": 20260901,
+  "sha256": {
+    "answers": "182c13efe4ab8f5109ba0971b0546bf64985cbff8f424457a9d0e6a810648e33",
+    "graph": "f84c9de9e86428d1a83ca0cb8246f4e13da4e346d382befd3c5a736ab299cfd8",
+    "queries": "b59bdbfa4ff90f1f119ff7b535526b63dd5f2d3fa3d5567eeb841d7b2a5f8c27"
+  },
+  "verify": {
+    "failures": 0,
+    "fits_uint32": true,
+    "max_finite_distance": 100926,
+    "sampled": 5000,
+    "unreachable": 0,
+    "unreachable_confirmed": 0,
+    "unreachable_frac": 0.0
+  },
+  "w_max": 999920,
+  "w_min": 1
+}

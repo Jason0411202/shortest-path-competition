@@ -1,30 +1,47 @@
 # --- Build artifacts ---
 foundation
 solver
+tools/ref/refsolve
 *.o
 *.obj
 *.a
 
-# --- Instructor-only material (NEVER commit to student repo) ---
+# --- Instructor-only material (NEVER commit to the student repo) ---
+# The generator itself (tools/gen) IS shipped -- students need it to make
+# practice instances with their own seeds. What stays behind is the secret
+# seed, the instances it produces, the design rationale, and -- most
+# importantly -- the reference solvers, which are complete working
+# implementations of exactly the techniques the assignment asks students to
+# find. Publishing tools/ref/solvers would be publishing the answer.
 docs/
-generate_dataset.py
+tools/manifest/hidden.json
+checksums/hidden.sha256
+instances_hidden/
 outputs/
+tools/ref/solvers/
+tools/discriminate.py
+tools/fuzz_solvers.py
 
 # --- Per-student / local work ---
-baseline_times.txt
-solver_times.txt
-machine.txt
-diff_from_foundation.patch
+solver.cpp
+result.json
 *.tmp.out
 
-# --- Large tier (distributed via GitHub Releases, not git) ---
+# --- Downloadable tier (distributed via GitHub Releases, not git) ---
+# Only the *_dev tier is committed.
 instances/*_large.graph
 instances/*_large.queries
+instances/*_large.answers
+instances/*_large.meta.json
+instances/*.qplan
+instances/*.gz
 
 # --- Tooling ---
 .claude/
 .vscode/
 .idea/
+__pycache__/
+*.pyc
 
 # --- OS junk ---
 .DS_Store
