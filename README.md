@@ -1,5 +1,7 @@
 # Shortest-Path Algorithms Competition
 
+*Course announcement: [English](COMPETITION.md) · [繁體中文](COMPETITION.zh-TW.md)*
+
 You are given a working Dijkstra implementation, `dijkstra_foundation.cpp`.
 Copy it to `solver.cpp` and make it faster. Same input, same output, less time.
 
