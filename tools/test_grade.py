@@ -20,6 +20,7 @@ tightly.  The tests check that the machinery works, not that the clock is
 quiet.
 """
 
+import hashlib
 import json
 import os
 import subprocess
@@ -81,6 +82,21 @@ def main():
         check("speedup within 45% of 1.0", 0.7 <= sp <= 1.45, f"speedup={sp:.3f}")
         check("baseline was extrapolated, not run in full",
               inst.get("baseline", {}).get("mode") == "probe")
+
+        print("\n[1b] the source digest binds solver.cpp to the timings")
+        src = Path(tmp) / "mine.cpp"
+        src.write_text("int main(){return 0;}\n")
+        res, _ = run_grade(tmp, FOUNDATION, extra=["--source", str(src)])
+        check("records the source digest",
+              res["solver_source_sha256"] == hashlib.sha256(
+                  src.read_bytes()).hexdigest(),
+              f"got {str(res['solver_source_sha256'])[:16]}...")
+        check("records which file it hashed",
+              res["solver_source"] == str(src))
+        res, _ = run_grade(tmp, FOUNDATION,
+                           extra=["--source", str(Path(tmp) / "absent.cpp")])
+        check("absent source gives null, not a crash",
+              res["solver_source_sha256"] is None)
 
         print("\n[2] wrong answers")
         # copy the foundation's output, then corrupt one line

@@ -100,7 +100,9 @@ checked by reading your `solver.cpp`.
 - `result.json`, written by step 4
 
 Nothing else. `result.json` already records your times, the baseline times,
-and the score.
+the score, and the SHA-256 of the `solver.cpp` it was measured from — so upload
+the two files from the same run, not a `result.json` from one attempt beside a
+`solver.cpp` from another.
 
 ## How the score works
 

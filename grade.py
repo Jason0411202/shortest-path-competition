@@ -85,6 +85,7 @@ DEFAULT_TIMEOUT = 3600.0
 # near-zero measurement.
 
 FOUNDATION_SRC = "dijkstra_foundation.cpp"
+SOLVER_SRC = "solver.cpp"
 FOUNDATION_FLAGS = ["-O2", "-std=c++17"]
 
 
@@ -409,6 +410,10 @@ def main():
     ap.add_argument("--no-limits", action="store_true",
                     help="skip the memory and thread checks (debugging only)")
     ap.add_argument("--json", type=Path, help="write machine-readable results here")
+    ap.add_argument("--source", type=Path, default=Path(SOLVER_SRC),
+                    help="your solver source; its digest goes into --json so "
+                         "the source and the timings travel together "
+                         f"(default {SOLVER_SRC})")
     args = ap.parse_args()
 
     args.solver = args.solver.resolve()
@@ -527,6 +532,14 @@ def main():
         payload = {
             "solver": str(args.solver),
             "solver_sha256": sha256_file(args.solver),
+            # The binary digest above says nothing about the source that
+            # produced it, so record the source too: a result.json and a
+            # solver.cpp handed in together can then be checked against each
+            # other. None if --source does not exist (e.g. grading the
+            # prebuilt foundation, which has no solver.cpp).
+            "solver_source": str(args.source),
+            "solver_source_sha256": (sha256_file(args.source)
+                                     if args.source.exists() else None),
             "foundation_source_sha256": src_digest,
             "foundation_flags": FOUNDATION_FLAGS,
             "repeats": REPEATS,
