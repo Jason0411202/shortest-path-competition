@@ -21,6 +21,9 @@ outputs/
 tools/ref/solvers/
 tools/discriminate.py
 tools/fuzz_solvers.py
+# The scoreboard Worker. src/validate.js IS the list of integrity checks;
+# shipping it would hand students the exact checks to defeat.
+scoreboard/
 
 # --- Per-student / local work ---
 solver.cpp
