@@ -84,19 +84,21 @@ Your `solver.cpp` must:
 3. Produce exactly the foundation's output on every instance (`-1` for
    unreachable).
 4. Be C++17 using only the standard library.
-5. Be single-threaded.
-6. Stay under 4 GB of memory and 3600 s per instance.
-7. Not contain precomputed answers.
+5. Be a single file: everything you write lives in `solver.cpp`, with no
+   headers of your own. `#include` only standard library headers.
+6. Be single-threaded.
+7. Stay under 4 GB of memory and 3600 s per instance.
+8. Not contain precomputed answers.
 
 Do **not** edit `dijkstra_foundation.cpp`. `grade.py` compiles it itself to
 measure the baseline; editing it would change your own baseline.
 
-`grade.py` enforces rules 3, 5 and 6 automatically. Rules 1, 4 and 7 are
+`grade.py` enforces rules 3, 6 and 7 automatically. Rules 1, 4, 5 and 8 are
 checked by reading your `solver.cpp`.
 
 ## What to submit
 
-- `solver.cpp` (plus any headers you added, and the `Makefile` if you changed it)
+- `solver.cpp`, the whole of your work in that one file
 - `result.json`, written by step 4
 
 Nothing else. `result.json` already records your times, the baseline times,
