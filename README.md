@@ -119,9 +119,9 @@ the two files from the same run, not a `result.json` from one attempt beside a
 2. Enter your **Student ID** exactly as it appears in the course roster. It is
    shown publicly on the board.
 3. Choose your `result.json` and your `solver.cpp`.
-4. Tick the honour-code box and click **Submit and view ranking**.
+4. Click **Submit and view ranking**.
 
-![The submit form: Student ID, result.json, solver.cpp, honour-code checkbox](slides/submit_form.png)
+![The submit form: Student ID, result.json, solver.cpp](slides/submit_form.png)
 
 The server re-derives your score from the per-instance times in `result.json`
 and ranks on that, then redirects you to the board with your row highlighted.
