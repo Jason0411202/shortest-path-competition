@@ -166,6 +166,41 @@ on your machine. Your score is the geometric mean of the six speedups.
 | `NONDETERMINISTIC` | the three timing runs gave different output | 0.1 |
 | `CRASH` / `NOOUTPUT` | non-zero exit, or no output file written | 0.1 |
 
+## From score to grade
+
+The board ranks you on the overall geometric mean. Your **course grade** is
+computed once, after the deadline, from a final run of `grade.py` on fresh
+instances — not from the times you uploaded. That run is done for everyone on
+one machine, so your own hardware neither helps nor hurts your grade.
+
+The grade is a normal curve over the class, centred on 83:
+
+```
+z     = (ln G - mean(ln G)) / sd(ln G)     G = your overall geomean
+grade = clip(83 + 7 * z, 70, 100)
+```
+
+`G` is a geometric mean of six speedups, so `ln G` is close to normally
+distributed across a class this size. The mapping turns that into grades with
+a class mean of 83, a floor of 70, and a handful of students in the high 90s.
+
+Three consequences worth knowing before you decide how much effort to spend:
+
+- **Every doubling of speed is worth the same.** Going from 2x to 4x moves you
+  as far up the curve as going from 100x to 200x. Your first real algorithmic
+  improvement is the one that pays.
+- **The very top of the board is worth very little.** A student 10x faster
+  than the class median sits about 2.3 log units out, and the gap between 3rd
+  place and 1st is a fraction of a grade point. Push until you stop learning,
+  then stop.
+- **A failed instance is what actually costs you.** One `WRONG`, `TIMEOUT`,
+  `MEMORY` or `THREADS` scores 0.1 and drags your geometric mean far enough
+  down to put you at or near the 70 floor. Correctness first, every time.
+
+Because the curve is fitted to the class, no individual grade exists until
+every submission is in. `grade_class.py` is the script that computes it;
+like `tools/`, it is instructor tooling and not part of your submission.
+
 ## The data
 
 Six instances are scored. Each is a different kind of graph, so a trick that
