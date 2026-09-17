@@ -1,0 +1,8 @@
+p='solver.cpp'; s=open(p,'rb').read().decode()
+s=s.replace('static uint64_t g_settles = 0, g_searches = 0;','static uint64_t g_settles = 0, g_searches = 0, g_con_settles = 0;')
+s=s.replace('        ++g_settles;\n','        ++g_settles;\n        if (max_settle == CON_SETTLE) ++g_con_settles;\n')
+s=s.replace('static uint64_t g_settles = 0,','static int SIM_SETTLE = 60, CON_SETTLE = 1000;\nstatic uint64_t g_settles = 0,')
+s=s.replace('static int SIM_SETTLE = 60, CON_SETTLE = 1000;\nstatic int64_t priority','static int64_t priority')
+s=s.replace('settles=%llu\n", next_rank, V, g[v].size(),','settles=%llu con=%llu\n", next_rank, V, g[v].size(),')
+s=s.replace('(unsigned long long)g_settles);','(unsigned long long)g_settles, (unsigned long long)g_con_settles);')
+open(p,'wb').write(s.encode())
